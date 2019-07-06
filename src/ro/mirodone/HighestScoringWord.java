@@ -2,9 +2,9 @@ package ro.mirodone;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class HighestScoringWord {
+ class HighestScoringWord {
 
-    public  String high(String s) {
+      String high(String s) {
 
         String[] words = s.split(" ");
         int max = 0;
@@ -28,7 +28,7 @@ public class HighestScoringWord {
 
     private final static String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
-    public static String high3(String s)  {
+      String high3(String s)  {
         int high = Integer.MIN_VALUE;
         String result = "";
         for (String item : s.split(" ")) {
@@ -41,11 +41,31 @@ public class HighestScoringWord {
         return result;
     }
 
-    public static String high4(String s) {
+      String high4(String s) {
         return Arrays.stream(s.split(" "))
                 .max(Comparator.comparingInt(
                         a -> a.chars().map(i -> i - 96).sum()
                 )).get();
+    }
+
+
+      String high5(String s) {
+
+        String winner = "";
+        int highScore = 0;
+
+        for (String word : s.split(" ")) {
+            int score = 0;
+            for (char c : word.toCharArray()) {
+                score += c - 'a' + 1;
+            }
+            if (score > highScore) {
+                winner = word;
+                highScore = score;
+            }
+        }
+
+        return winner;
     }
 
 }
